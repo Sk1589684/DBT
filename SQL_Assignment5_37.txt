@@ -1,0 +1,262 @@
+***************************= Assignment 5 =***************************************
+
+---------------------------------------------------------------------------------------------
+ 
+1. Display Name of the salesperson, customer name and amount of sales. 
+mysql> select e.ename, s.custname, s.amount
+    -> from sales s
+    -> join emp e
+    -> on s.repid = e.empno;
++--------+----------------+----------+
+| ename  | custname       | amount   |
++--------+----------------+----------+
+| TURNER | JOCKSPORTS     |  1703.40 |
+| TURNER | JOCKSPORTS     |   485.00 |
+| TURNER | JOCKSPORTS     |   292.50 |
+| TURNER | JOCKSPORTS     |    50.00 |
+| TURNER | JOCKSPORTS     |   350.00 |
+| TURNER | JOCKSPORTS     |  2400.00 |
+| WARD   | TKB SPORT SHOP |    35.00 |
+| WARD   | TKB SPORT SHOP |     8.40 |
+| WARD   | TKB SPORT SHOP |    58.00 |
+| MARTIN | VOLLYRITE      |  3306.00 |
+| MARTIN | VOLLYRITE      | 16569.00 |
+| MARTIN | VOLLYRITE      |  2300.50 |
+| MARTIN | VOLLYRITE      |  5600.00 |
+| WARD   | JUST TENNIS    |   450.00 |
+| WARD   | JUST TENNIS    |   140.00 |
+| WARD   | JUST TENNIS    |   116.00 |
+| WARD   | JUST TENNIS    |    34.00 |
+| WARD   | JUST TENNIS    |    24.00 |
+| ALLEN  | EVERY MOUNTAIN |   846.80 |
+| ALLEN  | EVERY MOUNTAIN |    24.00 |
+| ALLEN  | EVERY MOUNTAIN |  3000.00 |
+| ALLEN  | EVERY MOUNTAIN |   810.00 |
+| ALLEN  | EVERY MOUNTAIN |  1500.00 |
+| ALLEN  | EVERY MOUNTAIN |   400.00 |
+| ALLEN  | EVERY MOUNTAIN |   240.00 |
+| ALLEN  | EVERY MOUNTAIN |   340.00 |
+| TURNER | K + T SPORTS   |  1750.00 |
+| TURNER | K + T SPORTS   |  4500.00 |
+| TURNER | K + T SPORTS   |  1400.00 |
+| TURNER | K + T SPORTS   |  2800.00 |
+| TURNER | K + T SPORTS   | 29000.00 |
+| TURNER | K + T SPORTS   |  2400.00 |
+| TURNER | K + T SPORTS   |  2500.00 |
+| TURNER | K + T SPORTS   |   340.00 |
+| TURNER | K + T SPORTS   |   480.00 |
+| TURNER | K + T SPORTS   |  1200.00 |
+| WARD   | SHAPE UP       |     2.40 |
+| WARD   | SHAPE UP       |   174.00 |
+| WARD   | SHAPE UP       |    84.00 |
+| WARD   | SHAPE UP       |   440.00 |
+| ALLEN  | WOMENS SPORTS  |   180.00 |
+| ALLEN  | WOMENS SPORTS  |   280.00 |
+| ALLEN  | WOMENS SPORTS  |   250.00 |
+| TURNER | NORTH WOODS    |   560.00 |
+| TURNER | NORTH WOODS    |  4800.00 |
+| TURNER | NORTH WOODS    |   600.00 |
+| TURNER | NORTH WOODS    |   440.00 |
++--------+----------------+----------+
+--------------------------------------------------------------------------------------------- 
+2. List employee name and name of managers. 
+mysql> select e.ename as employee_name, m.ename as manager_name
+    -> from emp e
+    -> join emp m
+    -> on e.mgr = m.empno;
++---------------+--------------+
+| employee_name | manager_name |
++---------------+--------------+
+| GITA          | GRASS        |
+| VRUSHALI      | GRASS        |
+| SHARMIN       | GRASS        |
+| BANDISH       | GRASS        |
+| SMITH         | FORD         |
+| AARAV         | FORD         |
+| THOMAS        | GRASS        |
+| ALLEN         | BLAKE        |
+| WARD          | BLAKE        |
+| JONES         | KING         |
+| MARTIN        | BLAKE        |
+| BLAKE         | KING         |
+| CLARK         | KING         |
+| SCOTT         | JONES        |
+| FRED          | KING         |
+| TURNER        | BLAKE        |
+| ADAMS         | SCOTT        |
+| Ruhan         | Ruhan        |
+| Neel          | KING         |
+| JAMES         | BLAKE        |
+| FORD          | JONES        |
+| HOFFMAN       | JONES        |
+| GRASS         | HOFFMAN      |
+| MILLER        | CLARK        |
+| AARUSH        | FORD         |
+| ALEX          | BLAKE        |
+| NATASHA       | GRASS        |
+| SANGITA       | GRASS        |
+| SUPRIYA       | GRASS        |
++---------------+--------------+
+---------------------------------------------------------------------------------------------
+3. Display details of all departments and the corresponding employees  
+
+mysql> select d.deptno, d.dname, e.empno, e.ename, e.job
+    -> from dept d
+    -> left join emp e
+    -> on d.deptno = e.deptno;
++--------+------------+-------+----------+---------------------+
+| deptno | dname      | empno | ename    | job                 |
++--------+------------+-------+----------+---------------------+
+|     10 | ACCOUNTING |  7415 | AARAV    | CLERK               |
+|     10 | ACCOUNTING |  7421 | THOMAS   | CLERK               |
+|     10 | ACCOUNTING |  7782 | CLARK    | MANAGER             |
+|     10 | ACCOUNTING |  7839 | KING     | PRESIDENT           |
+|     10 | ACCOUNTING |  7934 | MILLER   | CLERK               |
+|     20 | RESEARCH   |  6473 | SHARMIN  | Public Relation     |
+|     20 | RESEARCH   |  6781 | BANDISH  | Public Relation     |
+|     20 | RESEARCH   |  7369 | SMITH    | CLERK               |
+|     20 | RESEARCH   |  7566 | JONES    | MANAGER             |
+|     20 | RESEARCH   |  7788 | SCOTT    | ANALYST             |
+|     20 | RESEARCH   |  7840 | FRED     | vice PRESIDENT      |
+|     20 | RESEARCH   |  7876 | ADAMS    | CLERK               |
+|     20 | RESEARCH   |  7902 | FORD     | ANALYST             |
+|     30 | SALES      |  6001 | GITA     | Compliance officers |
+|     30 | SALES      |  7499 | ALLEN    | SALESMAN            |
+|     30 | SALES      |  7521 | WARD     | SALESMAN            |
+|     30 | SALES      |  7654 | MARTIN   | SALESMAN            |
+|     30 | SALES      |  7698 | BLAKE    | MANAGER             |
+|     30 | SALES      |  7844 | TURNER   | SALESMAN            |
+|     30 | SALES      |  7900 | JAMES    | CLERK               |
+|     30 | SALES      |  7919 | HOFFMAN  | MANAGER             |
+|     30 | SALES      |  7920 | GRASS    | SALESMAN            |
+|     30 | SALES      |  7945 | AARUSH   | SALESMAN            |
+|     30 | SALES      |  7949 | ALEX     | MANAGER             |
+|     30 | SALES      |  8433 | NATASHA  | CLERK               |
+|     40 | OPERATIONS |  NULL | NULL     | NULL                |
+|     50 | HR         |  6129 | VRUSHALI | Compliance officers |
+|     50 | HR         |  9400 | SANGITA  | Compliance officers |
+|     50 | HR         |  9473 | SUPRIYA  | ANALYST             |
+|     60 | IT         |  7888 | Ruhan    | Network             |
+|     60 | IT         |  7889 | Neel     | vice PRESIDENT      |
++--------+------------+-------+----------+---------------------+
+---------------------------------------------------------------------------------------------
+4. Display all customer names with their order details (order number and ship date) for the orders shipped in 1987.
+mysql> select c.name,o.ordid, o.shipdate
+    -> from customer c
+    -> join ord o
+    -> on c.custid=o.custid
+    -> where year(o.shipdate)=1987;
++----------------+-------+------------+
+| name           | ordid | shipdate   |
++----------------+-------+------------+
+| TKB SPORT SHOP |   610 | 1987-01-08 |
+| VOLLYRITE      |   611 | 1987-01-11 |
+| EVERY MOUNTAIN |   612 | 1987-01-20 |
+| NORTH WOODS    |   613 | 1987-02-01 |
+| VOLLYRITE      |   614 | 1987-02-05 |
+| WOMENS SPORTS  |   615 | 1987-02-06 |
+| JUST TENNIS    |   616 | 1987-02-10 |
+| K + T SPORTS   |   617 | 1987-03-03 |
+| VOLLYRITE      |   618 | 1987-03-06 |
+| EVERY MOUNTAIN |   619 | 1987-02-04 |
+| JOCKSPORTS     |   620 | 1987-03-12 |
+| JOCKSPORTS     |   621 | 1987-03-01 |
+| K + T SPORTS   |   622 | 1987-01-01 |
+| K + T SPORTS   |   624 | 1987-01-06 |
+| K + T SPORTS   |   625 | 1987-01-10 |
+| WOMENS SPORTS  |   626 | 1987-02-01 |
+| JOCKSPORTS     |   627 | 1987-02-14 |
+| JOCKSPORTS     |   628 | 1987-03-14 |
+| JOCKSPORTS     |   629 | 1987-03-16 |
+| EVERY MOUNTAIN |   630 | 1987-02-22 |
+| EVERY MOUNTAIN |   631 | 1987-02-23 |
++----------------+-------+------------+
+21 rows in set (0.00 sec)
+--------------------------------------------------------------------------------------------- 
+5. Display salesman names and names of customers they are dealing with. 
+---------------------------------------------------------------------------------------------
+6. Display salesman who did not earn commission, with customer names whom they are dealing with.
+---------------------------------------------------------------------------------------------  
+7. Display salesman names, salary, commission and their salary grades. 
+mysql> select e.ename, e.sal, e.comm, s.grade
+    -> from emp e
+    -> join salgrade s
+    -> on e.sal between s.losal and s.hisal
+    -> where e.job = 'SALESMAN';
++--------+------+------+-------+
+| ename  | sal  | comm | grade |
++--------+------+------+-------+
+| AARUSH | 1350 | 2700 |     2 |
+| MARTIN | 1250 | 1400 |     2 |
+| WARD   | 1250 |  500 |     2 |
+| TURNER | 1500 |    0 |     3 |
+| ALLEN  | 1600 |  300 |     3 |
+| GRASS  | 2575 | 2700 |     4 |
++--------+------+------+-------+	
+---------------------------------------------------------------------------------------------
+8. Display all Tennis products and their price details (standard and minimum price). 
+mysql> select prodname,max(amount) as standard_price,min(amount) as minimum_price
+    -> from sales
+    -> where prodname like '%TENNIS%'
+    -> group by prodname;
++-------------------------+----------------+---------------+
+| prodname                | standard_price | minimum_price |
++-------------------------+----------------+---------------+
+| ACE TENNIS BALLS-3 PACK |        3306.00 |          8.40 |
+| ACE TENNIS RACKET I     |       16569.00 |         35.00 |
+| ACE TENNIS NET          |       29000.00 |         50.00 |
+| ACE TENNIS RACKET II    |        4500.00 |         84.00 |
+| RH: "GUIDE TO TENNIS"   |        1703.40 |         34.00 |
+| ACE TENNIS BALLS-6 PACK |        5600.00 |        250.00 |
+| SP TENNIS RACKET        |        4800.00 |         24.00 |
++-------------------------+----------------+---------------+
+7 rows in set (0.01 sec)
+---------------------------------------------------------------------------------------------
+9. Display the products purchased by either JOCKSPORTS (customer number 100) or JUST TENNIS (customer number 103) or both of them.
+mysql> select distinct prodname
+    -> from sales
+    -> where custid in (100,103);
++-------------------------+
+| prodname                |
++-------------------------+
+| RH: "GUIDE TO TENNIS"   |
+| ACE TENNIS RACKET II    |
+| ACE TENNIS BALLS-3 PACK |
+| ACE TENNIS NET          |
+| ACE TENNIS RACKET I     |
+| SB ENERGY BAR-6 PACK    |
++-------------------------+
+--------------------------------------------------------------------------------------------- 
+10. Display the department name, and salary of any employee whose salary and commission matches both the salary and commission of any employee in DALLAS.
+mysql> select d.dname,e.sal
+    -> from emp e
+    -> join dept d
+    -> on e.deptno=d.deptno
+    -> where (e.sal,e.comm) in (select e1.sal,e1.comm
+    -> from emp e1
+    -> join dept d1
+    -> on e1.deptno=d1.deptno
+    -> where d1.loc='DALLAS');
+
+Empty set (0.02 sec)
+--------------------------------------------------------------------------------------------- 
+11. List out the common jobs in Research and Accounting Departments in ascending order. 
+mysql> select distinct job
+    -> from emp
+    -> where deptno=20
+    -> and job in
+    -> (
+    -> select job
+    -> from emp
+    -> where deptno=10
+    -> )
+    -> order by job asc;
++---------+
+| job     |
++---------+
+| CLERK   |
+| MANAGER |
++---------+
+2 rows in set (0.01 sec)
+---------------------------------------------------------------------------------------------
+ 
