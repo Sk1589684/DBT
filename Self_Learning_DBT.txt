@@ -1,0 +1,1107 @@
+1)Performing basic CREATE, ALTER, DROP Commands
+
+1.1)mysql> CREATE TABLE Employee_New (
+    ->     EMPNO INT PRIMARY KEY,
+    ->     ENAME VARCHAR(50),
+    ->     JOB VARCHAR(50),
+    ->     SAL DECIMAL(10,2)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> select * from Employee_New;
+Empty set (0.00 sec)
+
+1.2)mysql> ALTER TABLE Employee_New
+    -> ADD EMAIL VARCHAR(100);
+Query OK, 0 rows affected (0.06 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+1.3)mysql> ALTER TABLE Employee_New
+    -> MODIFY EMAIL VARCHAR(150);
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+1.4)
+mysql> ALTER TABLE Employee_New
+    -> DROP COLUMN EMAIL;
+Query OK, 0 rows affected (0.05 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+1.5)ALTER TABLE Employee_New
+RENAME COLUMN ENAME TO EMP_NAME;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+1.6)
+mysql> DROP TABLE Employee_New;
+Query OK, 0 rows affected (0.02 sec)
+
+=====================================================================================================================================================
+
+Q2)mysql> CREATE TABLE Worker (
+    ->     Worker_ID INT PRIMARY KEY,
+    ->     First_Name VARCHAR(30) NOT NULL,
+    ->     Last_Name VARCHAR(30),
+    ->     Department VARCHAR(20),
+    ->     Salary DECIMAL(10,2),
+    ->     City VARCHAR(20),
+    ->     Joining_Date DATE,
+    ->     Bonus DECIMAL(8,2),
+    ->     Manager_ID INT,
+    ->     Email VARCHAR(50) UNIQUE
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+2.1)
+mysql> INSERT INTO Worker VALUES
+    -> (101,'Amit','Sharma','HR',45000,'Pune','2021-01-10',5000,NULL,'amit@gmail.com'),
+    -> (102,'Priya','Patil','IT',70000,'Mumbai','2020-05-15',7000,101,'priya@gmail.com'),
+    -> (103,'Rahul','Verma','IT',65000,'Pune','2022-03-20',6000,101,'rahul@gmail.com'),
+    -> (104,'Sneha','Joshi','Finance',80000,'Delhi','2019-07-11',9000,102,'sneha@gmail.com'),
+    -> (105,'Karan','Singh','HR',50000,'Mumbai','2021-09-18',4000,NULL,'karan@gmail.com'),
+    -> (106,'Neha','Gupta','IT',75000,'Pune','2020-11-25',8000,102,'neha@gmail.com'),
+    -> (107,'Vikas','Patel','Finance',90000,'Delhi','2018-06-12',10000,104,'vikas@gmail.com'),
+    -> (108,'Anjali','Mehta','Sales',55000,'Chennai','2022-08-05',3000,NULL,'anjali@gmail.com');
+Query OK, 8 rows affected (0.01 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+mysql> select * from Worker;
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus    | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune    | 2021-01-10   |  5000.00 |       NULL | amit@gmail.com   |
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai  | 2020-05-15   |  7000.00 |        101 | priya@gmail.com  |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune    | 2022-03-20   |  6000.00 |        101 | rahul@gmail.com  |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi   | 2019-07-11   |  9000.00 |        102 | sneha@gmail.com  |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai  | 2021-09-18   |  4000.00 |       NULL | karan@gmail.com  |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune    | 2020-11-25   |  8000.00 |        102 | neha@gmail.com   |
+|       107 | Vikas      | Patel     | Finance    | 90000.00 | Delhi   | 2018-06-12   | 10000.00 |        104 | vikas@gmail.com  |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   |  3000.00 |       NULL | anjali@gmail.com |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+8 rows in set (0.00 sec)
+
+2.2)mysql> ALTER TABLE Worker
+    -> ADD Phone VARCHAR(15);
+Query OK, 0 rows affected (0.03 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from worker;
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+-------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus    | Manager_ID | Email            | Phone |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+-------+
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune    | 2021-01-10   |  5000.00 |       NULL | amit@gmail.com   | NULL  |
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai  | 2020-05-15   |  7000.00 |        101 | priya@gmail.com  | NULL  |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune    | 2022-03-20   |  6000.00 |        101 | rahul@gmail.com  | NULL  |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi   | 2019-07-11   |  9000.00 |        102 | sneha@gmail.com  | NULL  |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai  | 2021-09-18   |  4000.00 |       NULL | karan@gmail.com  | NULL  |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune    | 2020-11-25   |  8000.00 |        102 | neha@gmail.com   | NULL  |
+|       107 | Vikas      | Patel     | Finance    | 90000.00 | Delhi   | 2018-06-12   | 10000.00 |        104 | vikas@gmail.com  | NULL  |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   |  3000.00 |       NULL | anjali@gmail.com | NULL  |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+-------+
+8 rows in set (0.00 sec)
+
+mysql> ALTER TABLE Worker
+    -> DROP COLUMN Phone;
+Query OK, 0 rows affected (0.02 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> select * from worker;
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus    | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune    | 2021-01-10   |  5000.00 |       NULL | amit@gmail.com   |
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai  | 2020-05-15   |  7000.00 |        101 | priya@gmail.com  |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune    | 2022-03-20   |  6000.00 |        101 | rahul@gmail.com  |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi   | 2019-07-11   |  9000.00 |        102 | sneha@gmail.com  |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai  | 2021-09-18   |  4000.00 |       NULL | karan@gmail.com  |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune    | 2020-11-25   |  8000.00 |        102 | neha@gmail.com   |
+|       107 | Vikas      | Patel     | Finance    | 90000.00 | Delhi   | 2018-06-12   | 10000.00 |        104 | vikas@gmail.com  |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   |  3000.00 |       NULL | anjali@gmail.com |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT SUM(Salary) AS Total_Salary
+    -> FROM Worker;
++--------------+
+| Total_Salary |
++--------------+
+|    530000.00 |
++--------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT AVG(Salary) AS Average_Salary
+    -> FROM Worker;
++----------------+
+| Average_Salary |
++----------------+
+|   66250.000000 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT COUNT(*) AS Total_Workers
+    -> FROM Worker;
++---------------+
+| Total_Workers |
++---------------+
+|             8 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MAX(Salary) AS Highest_Salary
+    -> FROM Worker;
++----------------+
+| Highest_Salary |
++----------------+
+|       90000.00 |
++----------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT MIN(Salary) AS Lowest_Salary
+    -> FROM Worker;
++---------------+
+| Lowest_Salary |
++---------------+
+|      45000.00 |
++---------------+
+1 row in set (0.00 sec)
+
+mysql> SELECT Department, COUNT(*) AS Employees
+    -> FROM Worker
+    -> GROUP BY Department;
++------------+-----------+
+| Department | Employees |
++------------+-----------+
+| HR         |         2 |
+| IT         |         3 |
+| Finance    |         2 |
+| Sales      |         1 |
++------------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT Department, COUNT(*) AS Employees
+    -> FROM Worker
+    -> GROUP BY Department
+    -> HAVING COUNT(*) > 2;
++------------+-----------+
+| Department | Employees |
++------------+-----------+
+| IT         |         3 |
++------------+-----------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> WHERE First_Name LIKE 'A%';
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus   | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune    | 2021-01-10   | 5000.00 |       NULL | amit@gmail.com   |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   | 3000.00 |       NULL | anjali@gmail.com |
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+2 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> WHERE First_Name LIKE '%a';
++-----------+------------+-----------+------------+----------+--------+--------------+---------+------------+-----------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City   | Joining_Date | Bonus   | Manager_ID | Email           |
++-----------+------------+-----------+------------+----------+--------+--------------+---------+------------+-----------------+
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai | 2020-05-15   | 7000.00 |        101 | priya@gmail.com |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi  | 2019-07-11   | 9000.00 |        102 | sneha@gmail.com |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune   | 2020-11-25   | 8000.00 |        102 | neha@gmail.com  |
++-----------+------------+-----------+------------+----------+--------+--------------+---------+------------+-----------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT DISTINCT City
+    -> FROM Worker;
++---------+
+| City    |
++---------+
+| Pune    |
+| Mumbai  |
+| Delhi   |
+| Chennai |
++---------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> ORDER BY Salary ASC;
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus    | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune    | 2021-01-10   |  5000.00 |       NULL | amit@gmail.com   |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai  | 2021-09-18   |  4000.00 |       NULL | karan@gmail.com  |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   |  3000.00 |       NULL | anjali@gmail.com |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune    | 2022-03-20   |  6000.00 |        101 | rahul@gmail.com  |
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai  | 2020-05-15   |  7000.00 |        101 | priya@gmail.com  |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune    | 2020-11-25   |  8000.00 |        102 | neha@gmail.com   |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi   | 2019-07-11   |  9000.00 |        102 | sneha@gmail.com  |
+|       107 | Vikas      | Patel     | Finance    | 90000.00 | Delhi   | 2018-06-12   | 10000.00 |        104 | vikas@gmail.com  |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> ORDER BY Salary DESC;
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus    | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+|       107 | Vikas      | Patel     | Finance    | 90000.00 | Delhi   | 2018-06-12   | 10000.00 |        104 | vikas@gmail.com  |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi   | 2019-07-11   |  9000.00 |        102 | sneha@gmail.com  |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune    | 2020-11-25   |  8000.00 |        102 | neha@gmail.com   |
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai  | 2020-05-15   |  7000.00 |        101 | priya@gmail.com  |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune    | 2022-03-20   |  6000.00 |        101 | rahul@gmail.com  |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   |  3000.00 |       NULL | anjali@gmail.com |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai  | 2021-09-18   |  4000.00 |       NULL | karan@gmail.com  |
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune    | 2021-01-10   |  5000.00 |       NULL | amit@gmail.com   |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+8 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> WHERE Salary BETWEEN 50000 AND 80000;
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus   | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai  | 2020-05-15   | 7000.00 |        101 | priya@gmail.com  |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune    | 2022-03-20   | 6000.00 |        101 | rahul@gmail.com  |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi   | 2019-07-11   | 9000.00 |        102 | sneha@gmail.com  |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai  | 2021-09-18   | 4000.00 |       NULL | karan@gmail.com  |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune    | 2020-11-25   | 8000.00 |        102 | neha@gmail.com   |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   | 3000.00 |       NULL | anjali@gmail.com |
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> WHERE Manager_ID IS NULL;
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus   | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune    | 2021-01-10   | 5000.00 |       NULL | amit@gmail.com   |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai  | 2021-09-18   | 4000.00 |       NULL | karan@gmail.com  |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   | 3000.00 |       NULL | anjali@gmail.com |
++-----------+------------+-----------+------------+----------+---------+--------------+---------+------------+------------------+
+3 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> WHERE Manager_ID IS NOT NULL;
++-----------+------------+-----------+------------+----------+--------+--------------+----------+------------+-----------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City   | Joining_Date | Bonus    | Manager_ID | Email           |
++-----------+------------+-----------+------------+----------+--------+--------------+----------+------------+-----------------+
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai | 2020-05-15   |  7000.00 |        101 | priya@gmail.com |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune   | 2022-03-20   |  6000.00 |        101 | rahul@gmail.com |
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi  | 2019-07-11   |  9000.00 |        102 | sneha@gmail.com |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune   | 2020-11-25   |  8000.00 |        102 | neha@gmail.com  |
+|       107 | Vikas      | Patel     | Finance    | 90000.00 | Delhi  | 2018-06-12   | 10000.00 |        104 | vikas@gmail.com |
++-----------+------------+-----------+------------+----------+--------+--------------+----------+------------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> WHERE City IN ('Pune','Mumbai');
++-----------+------------+-----------+------------+----------+--------+--------------+---------+------------+-----------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City   | Joining_Date | Bonus   | Manager_ID | Email           |
++-----------+------------+-----------+------------+----------+--------+--------------+---------+------------+-----------------+
+|       101 | Amit       | Sharma    | HR         | 45000.00 | Pune   | 2021-01-10   | 5000.00 |       NULL | amit@gmail.com  |
+|       102 | Priya      | Patil     | IT         | 70000.00 | Mumbai | 2020-05-15   | 7000.00 |        101 | priya@gmail.com |
+|       103 | Rahul      | Verma     | IT         | 65000.00 | Pune   | 2022-03-20   | 6000.00 |        101 | rahul@gmail.com |
+|       105 | Karan      | Singh     | HR         | 50000.00 | Mumbai | 2021-09-18   | 4000.00 |       NULL | karan@gmail.com |
+|       106 | Neha       | Gupta     | IT         | 75000.00 | Pune   | 2020-11-25   | 8000.00 |        102 | neha@gmail.com  |
++-----------+------------+-----------+------------+----------+--------+--------------+---------+------------+-----------------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Worker
+    -> WHERE City NOT IN ('Pune','Mumbai');
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+| Worker_ID | First_Name | Last_Name | Department | Salary   | City    | Joining_Date | Bonus    | Manager_ID | Email            |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+|       104 | Sneha      | Joshi     | Finance    | 80000.00 | Delhi   | 2019-07-11   |  9000.00 |        102 | sneha@gmail.com  |
+|       107 | Vikas      | Patel     | Finance    | 90000.00 | Delhi   | 2018-06-12   | 10000.00 |        104 | vikas@gmail.com  |
+|       108 | Anjali     | Mehta     | Sales      | 55000.00 | Chennai | 2022-08-05   |  3000.00 |       NULL | anjali@gmail.com |
++-----------+------------+-----------+------------+----------+---------+--------------+----------+------------+------------------+
+3 rows in set (0.00 sec)
+
+============================================================================================================================================================
+
+Q3)3. Union/Union ALL Queries on Various type of Joins using OLD and SQL Standard Syntax Copying table structure, Copying data from one table to another Using AUTO_INCREMENT.
+
+mysql> CREATE TABLE Employee(
+    ->     emp_id INT,
+    ->     emp_name VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> desc Employee;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | YES  |     | NULL    |       |
+| emp_name | varchar(50) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Manager(
+    ->     emp_id INT,
+    ->     emp_name VARCHAR(50)
+    -> );
+Query OK, 0 rows affected (0.13 sec)
+
+mysql> desc Manager;
++----------+-------------+------+-----+---------+-------+
+| Field    | Type        | Null | Key | Default | Extra |
++----------+-------------+------+-----+---------+-------+
+| emp_id   | int         | YES  |     | NULL    |       |
+| emp_name | varchar(50) | YES  |     | NULL    |       |
++----------+-------------+------+-----+---------+-------+
+2 rows in set (0.00 sec)
+
+mysql> INSERT INTO Employee VALUES(101,'Amit'),(102,'Rahul'),(103,'Priya'),(104,'Sneha');
+Query OK, 4 rows affected (0.09 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from Employee;
++--------+----------+
+| emp_id | emp_name |
++--------+----------+
+|    101 | Amit     |
+|    102 | Rahul    |
+|    103 | Priya    |
+|    104 | Sneha    |
++--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> INSERT INTO Manager VALUES(201,'Rahul'),(202,'Kiran'),(203,'Sneha'),(204,'Neha');
+Query OK, 4 rows affected (0.35 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from Manager;
++--------+----------+
+| emp_id | emp_name |
++--------+----------+
+|    201 | Rahul    |
+|    202 | Kiran    |
+|    203 | Sneha    |
+|    204 | Neha     |
++--------+----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT emp_name FROM Employee
+    -> UNION
+    -> SELECT emp_name FROM Manager;
++----------+
+| emp_name |
++----------+
+| Amit     |
+| Rahul    |
+| Priya    |
+| Sneha    |
+| Kiran    |
+| Neha     |
++----------+
+6 rows in set (0.00 sec)
+
+mysql> SELECT emp_name FROM Employee
+    -> UNION ALL
+    -> SELECT emp_name FROM Manager;
++----------+
+| emp_name |
++----------+
+| Amit     |
+| Rahul    |
+| Priya    |
+| Sneha    |
+| Rahul    |
+| Kiran    |
+| Sneha    |
+| Neha     |
++----------+
+8 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Employee(    emp_id INT PRIMARY KEY,    emp_name VARCHAR(50),    dept_id INT);
+Query OK, 0 rows affected (0.26 sec)
+
+mysql> CREATE TABLE Department(    dept_id INT PRIMARY KEY,    dept_name VARCHAR(50));
+Query OK, 0 rows affected (0.34 sec)
+
+mysql> INSERT INTO Department VALUES(1,'HR'),(2,'IT'),(3,'Finance'),(4,'Admin');
+Query OK, 4 rows affected (0.31 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> INSERT INTO Employee VALUES(101,'Amit',1),(102,'Rahul',2),(103,'Priya',2),(104,'Sneha',3),(105,'Neha',5);
+Query OK, 5 rows affected (0.27 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT e.emp_id,
+    ->        e.emp_name,
+    ->        d.dept_name
+    -> FROM Employee e
+    -> INNER JOIN Department d
+    -> ON e.dept_id = d.dept_id;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|    101 | Amit     | HR        |
+|    102 | Rahul    | IT        |
+|    103 | Priya    | IT        |
+|    104 | Sneha    | Finance   |
++--------+----------+-----------+
+4 rows in set (0.00 sec)
+
+mysql> SELECT e.emp_id,
+    ->        e.emp_name,
+    ->        d.dept_name
+    -> FROM Employee e
+    -> LEFT JOIN Department d
+    -> ON e.dept_id = d.dept_id;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|    101 | Amit     | HR        |
+|    102 | Rahul    | IT        |
+|    103 | Priya    | IT        |
+|    104 | Sneha    | Finance   |
+|    105 | Neha     | NULL      |
++--------+----------+-----------+
+5 rows in set (0.00 sec)
+
+mysql> SELECT e.emp_id,
+    ->        e.emp_name,
+    ->        d.dept_name
+    -> FROM Employee e
+    -> RIGHT JOIN Department d
+    -> ON e.dept_id = d.dept_id;
++--------+----------+-----------+
+| emp_id | emp_name | dept_name |
++--------+----------+-----------+
+|    101 | Amit     | HR        |
+|    103 | Priya    | IT        |
+|    102 | Rahul    | IT        |
+|    104 | Sneha    | Finance   |
+|   NULL | NULL     | Admin     |
++--------+----------+-----------+
+5 rows in set (0.18 sec)
+
+mysql> SELECT e.emp_name,
+    ->        d.dept_name
+    -> FROM Employee e
+    -> CROSS JOIN Department d;
++----------+-----------+
+| emp_name | dept_name |
++----------+-----------+
+| Amit     | Admin     |
+| Amit     | Finance   |
+| Amit     | IT        |
+| Amit     | HR        |
+| Rahul    | Admin     |
+| Rahul    | Finance   |
+| Rahul    | IT        |
+| Rahul    | HR        |
+| Priya    | Admin     |
+| Priya    | Finance   |
+| Priya    | IT        |
+| Priya    | HR        |
+| Sneha    | Admin     |
+| Sneha    | Finance   |
+| Sneha    | IT        |
+| Sneha    | HR        |
+| Neha     | Admin     |
+| Neha     | Finance   |
+| Neha     | IT        |
+| Neha     | HR        |
++----------+-----------+
+20 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Employee_Backup
+    -> LIKE Employee;
+Query OK, 0 rows affected (0.16 sec)
+
+mysql> INSERT INTO Employee_Backup
+    -> SELECT * FROM Employee;
+Query OK, 5 rows affected (0.41 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Employee_Backup;
++--------+----------+---------+
+| emp_id | emp_name | dept_id |
++--------+----------+---------+
+|    101 | Amit     |       1 |
+|    102 | Rahul    |       2 |
+|    103 | Priya    |       2 |
+|    104 | Sneha    |       3 |
+|    105 | Neha     |       5 |
++--------+----------+---------+
+5 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Employee_Auto(
+    ->     emp_id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     emp_name VARCHAR(50),
+    ->     dept_id INT
+    -> );
+Query OK, 0 rows affected (0.11 sec)
+
+mysql> INSERT INTO Employee_Auto(emp_name,dept_id)
+    -> VALUES
+    -> ('Amit',1),
+    -> ('Rahul',2),
+    -> ('Priya',2);
+Query OK, 3 rows affected (0.07 sec)
+Records: 3  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM Employee_Auto;
++--------+----------+---------+
+| emp_id | emp_name | dept_id |
++--------+----------+---------+
+|      1 | Amit     |       1 |
+|      2 | Rahul    |       2 |
+|      3 | Priya    |       2 |
++--------+----------+---------+
+3 rows in set (0.00 sec)
+
+mysql> CREATE TABLE Employee(    emp_id INT PRIMARY KEY,    emp_name VARCHAR(50),    dept_id INT,    salary INT);
+Query OK, 0 rows affected (0.08 sec)
+
+mysql> INSERT INTO Employee VALUES(101,'Amit',1,50000),(102,'Rahul',2,60000),(103,'Priya',2,55000),(104,'Sneha',3,70000),(105,'Neha',5,45000);
+Query OK, 5 rows affected (0.03 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT *
+    -> FROM Employee
+    -> WHERE salary >
+    -> (
+    ->    SELECT AVG(salary)
+    ->    FROM Employee
+    -> );
++--------+----------+---------+--------+
+| emp_id | emp_name | dept_id | salary |
++--------+----------+---------+--------+
+|    102 | Rahul    |       2 |  60000 |
+|    104 | Sneha    |       3 |  70000 |
++--------+----------+---------+--------+
+2 rows in set (0.24 sec)
+
+mysql> SELECT *
+    -> FROM Employee e1
+    -> WHERE salary >
+    -> (
+    ->    SELECT AVG(salary)
+    ->    FROM Employee e2
+    ->    WHERE e1.dept_id = e2.dept_id
+    -> );
++--------+----------+---------+--------+
+| emp_id | emp_name | dept_id | salary |
++--------+----------+---------+--------+
+|    102 | Rahul    |       2 |  60000 |
++--------+----------+---------+--------+
+1 row in set (0.00 sec)
+
+mysql> SELECT *
+    -> FROM Department d
+    -> WHERE EXISTS
+    -> (
+    ->    SELECT *
+    ->    FROM Employee e
+    ->    WHERE e.dept_id = d.dept_id
+    -> );
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       1 | HR        |
+|       2 | IT        |
+|       3 | Finance   |
++---------+-----------+
+3 rows in set (0.03 sec)
+
+mysql> SELECT *
+    -> FROM Department d
+    -> WHERE NOT EXISTS
+    -> (
+    ->    SELECT *
+    ->    FROM Employee e
+    ->    WHERE e.dept_id = d.dept_id
+    -> );
++---------+-----------+
+| dept_id | dept_name |
++---------+-----------+
+|       4 | Admin     |
++---------+-----------+
+1 row in set (0.00 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO Employee
+    -> VALUES(106,'Kiran',1,65000);
+Query OK, 1 row affected (0.12 sec)
+
+mysql>
+mysql> COMMIT;
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO Employee
+    -> VALUES(107,'Riya',2,50000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> ROLLBACK;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO Employee
+    -> VALUES(108,'Pooja',1,45000);
+Query OK, 1 row affected (0.03 sec)
+
+mysql>
+mysql> SAVEPOINT sp1;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql> INSERT INTO Employee
+    -> VALUES(109,'Anil',2,52000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> ROLLBACK TO sp1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> COMMIT;
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> START TRANSACTION;
+Query OK, 0 rows affected (0.00 sec)
+
+
+mysql> SAVEPOINT sp1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> INSERT INTO Employee
+    -> VALUES(109,'Anil',2,52000);
+Query OK, 1 row affected (0.00 sec)
+
+mysql>
+mysql> ROLLBACK TO sp1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql>
+mysql> COMMIT;
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> select * from Employee;
++--------+----------+---------+--------+
+| emp_id | emp_name | dept_id | salary |
++--------+----------+---------+--------+
+|    101 | Amit     |       1 |  50000 |
+|    102 | Rahul    |       2 |  60000 |
+|    103 | Priya    |       2 |  55000 |
+|    104 | Sneha    |       3 |  70000 |
+|    105 | Neha     |       5 |  45000 |
+|    106 | Kiran    |       1 |  65000 |
+|    108 | Pooja    |       1 |  45000 |
++--------+----------+---------+--------+
+7 rows in set (0.00 sec)
+
+mysql> GRANT SELECT
+    -> ON Employee
+    -> TO 'user1'@'localhost';
+ERROR 1410 (42000): You are not allowed to create a user with GRANT
+mysql> CREATE VIEW Employee_View AS
+    -> SELECT emp_id,
+    ->        emp_name,
+    ->        salary
+    -> FROM Employee;
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> SELECT * FROM Employee_View;
++--------+----------+--------+
+| emp_id | emp_name | salary |
++--------+----------+--------+
+|    101 | Amit     |  50000 |
+|    102 | Rahul    |  60000 |
+|    103 | Priya    |  55000 |
+|    104 | Sneha    |  70000 |
+|    105 | Neha     |  45000 |
+|    106 | Kiran    |  65000 |
+|    108 | Pooja    |  45000 |
++--------+----------+--------+
+7 rows in set (0.02 sec)
+
+mysql> CREATE INDEX idx_empname
+    -> ON Employee(emp_name);
+Query OK, 0 rows affected (0.37 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> SHOW INDEX FROM Employee;
++----------+------------+-------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| Table    | Non_unique | Key_name    | Seq_in_index | Column_name | Collation | Cardinality | Sub_part | Packed | Null | Index_type | Comment | Index_comment | Visible | Expression |
++----------+------------+-------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+| employee |          0 | PRIMARY     |            1 | emp_id      | A         |           8 |     NULL |   NULL |      | BTREE      |         |               | YES     | NULL       |
+| employee |          1 | idx_empname |            1 | emp_name    | A         |           7 |     NULL |   NULL | YES  | BTREE      |         |               | YES     | NULL       |
++----------+------------+-------------+--------------+-------------+-----------+-------------+----------+--------+------+------------+---------+---------------+---------+------------+
+2 rows in set (0.54 sec)
+
+
+5. Use of flow control statement in Stored Procedure Use of conditional statements in Stored Procedure.
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE CheckSalary(IN sal INT)
+    -> BEGIN
+    ->     IF sal >= 60000 THEN
+    ->         SELECT 'High Salary' AS Result;
+    ->     ELSE
+    ->         SELECT 'Low Salary' AS Result;
+    ->     END IF;
+    -> END //
+Query OK, 0 rows affected (0.21 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL CheckSalary(70000);
++-------------+
+| Result      |
++-------------+
+| High Salary |
++-------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE GradeSalary(IN sal INT)
+    -> BEGIN
+    ->     IF sal >= 70000 THEN
+    ->         SELECT 'Grade A' AS Grade;
+    ->     ELSEIF sal >= 50000 THEN
+    ->         SELECT 'Grade B' AS Grade;
+    ->     ELSE
+    ->         SELECT 'Grade C' AS Grade;
+    ->     END IF;
+    -> END //
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL GradeSalary(55000);
++---------+
+| Grade   |
++---------+
+| Grade B |
++---------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE PrintNumbers()
+    -> BEGIN
+    ->     DECLARE i INT DEFAULT 1;
+    ->
+    ->     myloop: LOOP
+    ->         SELECT i;
+    ->
+    ->         SET i = i + 1;
+    ->
+    ->         IF i > 5 THEN
+    ->             LEAVE myloop;
+    ->         END IF;
+    ->     END LOOP;
+    -> END //
+Query OK, 0 rows affected (0.07 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL PrintNumbers();
++------+
+| i    |
++------+
+|    1 |
++------+
+1 row in set (0.00 sec)
+
++------+
+| i    |
++------+
+|    2 |
++------+
+1 row in set (0.01 sec)
+
++------+
+| i    |
++------+
+|    3 |
++------+
+1 row in set (0.01 sec)
+
++------+
+| i    |
++------+
+|    4 |
++------+
+1 row in set (0.03 sec)
+
++------+
+| i    |
++------+
+|    5 |
++------+
+1 row in set (0.03 sec)
+
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE SalaryCategory(IN sal INT)
+    -> BEGIN
+    ->     CASE
+    ->         WHEN sal >= 70000 THEN
+    ->             SELECT 'Excellent';
+    ->         WHEN sal >= 50000 THEN
+    ->             SELECT 'Good';
+    ->         ELSE
+    ->             SELECT 'Average';
+    ->     END CASE;
+    -> END //
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL SalaryCategory(70000);
++-----------+
+| Excellent |
++-----------+
+| Excellent |
++-----------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+
+6. Writing procedures with Declare, fetch and close cursor Example of each type of cursors.
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE EmployeeCursor()
+    -> BEGIN
+    ->     DECLARE v_name VARCHAR(50);
+    ->     DECLARE done INT DEFAULT FALSE;
+    ->
+    ->     DECLARE emp_cursor CURSOR FOR
+    ->         SELECT emp_name FROM Employee;
+    ->
+    ->     DECLARE CONTINUE HANDLER FOR NOT FOUND
+    ->         SET done = TRUE;
+    ->
+    ->     OPEN emp_cursor;
+    ->
+    ->     read_loop: LOOP
+    ->
+    ->         FETCH emp_cursor INTO v_name;
+    ->
+    ->         IF done THEN
+    ->             LEAVE read_loop;
+    ->         END IF;
+    ->
+    ->         SELECT v_name;
+    ->
+    ->     END LOOP;
+    ->
+    ->     CLOSE emp_cursor;
+    ->
+    -> END //
+Query OK, 0 rows affected (0.10 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL EmployeeCursor();
++--------+
+| v_name |
++--------+
+| Amit   |
++--------+
+1 row in set (0.00 sec)
+
++--------+
+| v_name |
++--------+
+| Kiran  |
++--------+
+1 row in set (0.01 sec)
+
++--------+
+| v_name |
++--------+
+| Neha   |
++--------+
+1 row in set (0.02 sec)
+
++--------+
+| v_name |
++--------+
+| Pooja  |
++--------+
+1 row in set (0.03 sec)
+
++--------+
+| v_name |
++--------+
+| Priya  |
++--------+
+1 row in set (0.03 sec)
+
++--------+
+| v_name |
++--------+
+| Rahul  |
++--------+
+1 row in set (0.04 sec)
+
++--------+
+| v_name |
++--------+
+| Sneha  |
++--------+
+1 row in set (0.05 sec)
+
+Query OK, 0 rows affected (0.05 sec)
+
+7. 
+mysql> CREATE TABLE Employee_Log(
+    ->     message VARCHAR(100)
+    -> );
+Query OK, 0 rows affected (0.17 sec)
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE TRIGGER before_employee_insert
+    -> BEFORE INSERT
+    -> ON Employee
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     SET NEW.emp_name = UPPER(NEW.emp_name);
+    -> END //
+Query OK, 0 rows affected (0.05 sec)
+
+mysql>
+mysql> DELIMITER ;
+
+mysql>emp_id	emp_name	salary
+101	AMIT	50000
+
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE TRIGGER after_employee_insert
+    -> AFTER INSERT
+    -> ON Employee
+    -> FOR EACH ROW
+    -> BEGIN
+    ->     INSERT INTO Employee_Log
+    ->     VALUES('New Employee Added');
+    -> END //
+Query OK, 0 rows affected (0.17 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> INSERT INTO Employee VALUES
+    -> (102,'Rahul',60000);
+
+mysql> SELECT * FROM Employee_Log;
+mysql> New Employee Added
+
+
+8. Exception handling in Stored Procedure Exception handling with various handler actions.
+mysql> CREATE PROCEDURE ContinueHandlerDemo()
+    -> BEGIN
+    ->     DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+    ->     SELECT 'Error Occurred, Continuing Execution' AS Message;
+    ->
+    ->     INSERT INTO Employee VALUES
+    ->     (101,'Priya',55000);
+    ->
+    ->     SELECT 'Procedure Completed' AS Status;
+    -> END //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL ContinueHandlerDemo();
++--------------------------------------+
+| Message                              |
++--------------------------------------+
+| Error Occurred, Continuing Execution |
++--------------------------------------+
+1 row in set (0.00 sec)
+
++---------------------+
+| Status              |
++---------------------+
+| Procedure Completed |
++---------------------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE ExitHandlerDemo()
+    -> BEGIN
+    ->     DECLARE EXIT HANDLER FOR SQLEXCEPTION
+    ->     SELECT 'Error Occurred, Procedure Stopped' AS Message;
+    ->
+    ->     INSERT INTO Employee VALUES
+    ->     (101,'Sneha',70000);
+    ->
+    ->     SELECT 'Procedure Completed';
+    -> END //
+Query OK, 0 rows affected (0.04 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> CALL ExitHandlerDemo();
++-----------------------------------+
+| Message                           |
++-----------------------------------+
+| Error Occurred, Procedure Stopped |
++-----------------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE ExceptionDemo()
+    -> BEGIN
+    ->     DECLARE CONTINUE HANDLER
+    ->     FOR SQLEXCEPTION
+    ->     SELECT 'SQL Exception Occurred';
+    ->
+    ->     INSERT INTO Employee VALUES
+    ->     (101,'Test',50000);
+    -> END //
+Query OK, 0 rows affected (0.21 sec)
+
+mysql>
+mysql> DELIMITER ;
+mysql> call ExceptionDemo();
++------------------------+
+| SQL Exception Occurred |
++------------------------+
+| SQL Exception Occurred |
++------------------------+
+1 row in set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
